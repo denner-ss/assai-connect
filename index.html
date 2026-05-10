@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Assaí Connect</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+
+  --bg:#050B13;
+
+  --glass:rgba(7,18,31,.74);
+  --glass-2:rgba(11,28,46,.68);
+
+  --border:rgba(255,255,255,.08);
+
+  --text:#F5F9FF;
+  --muted:#AFC4DA;
+
+  --orange:#F58220;
+  --orange-light:#ffab5b;
+
+  --shadow:0 12px 40px rgba(0,0,0,.45);
+
+}
+
+body{
+
+  font-family:'Inter',sans-serif;
+
+  background:
+  linear-gradient(
+    rgba(5,11,19,.82),
+    rgba(5,11,19,.9)
+  ),
+  url('https://diariodorio.com/wp-content/uploads/2023/10/image-1.jpg');
+
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+
+  color:var(--text);
+
+  min-height:100vh;
+
+  padding:24px;
+
+}
+
+.container{
+  max-width:760px;
+  margin:auto;
+}
+
+.hero{
+  margin-bottom:26px;
+}
+
+.brand-area{
+
+  display:flex;
+  align-items:center;
+  gap:16px;
+
+  margin-bottom:26px;
+
+}
+
+.logo{
+
+  width:68px;
+  height:68px;
+
+  border-radius:22px;
+
+  background:white;
+
+  padding:10px;
+
+  object-fit:contain;
+
+  box-shadow:var(--shadow);
+
+}
+
+.brand-title{
+
+  font-size:34px;
+  font-weight:800;
+  letter-spacing:-0.03em;
+
+}
+
+.brand-subtitle{
+
+  color:var(--muted);
+
+  margin-top:6px;
+
+  font-size:14px;
+
+}
+
+.search{
+
+  width:100%;
+  height:66px;
+
+  border:none;
+  outline:none;
+
+  border-radius:24px;
+
+  background:var(--glass);
+
+  border:1px solid var(--border);
+
+  color:var(--text);
+
+  padding:0 24px;
+
+  font-size:16px;
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:var(--shadow);
+
+}
+
+.search::placeholder{
+  color:var(--muted);
+}
+
+.search:focus{
+
+  border-color:rgba(245,130,32,.45);
+
+  box-shadow:
+  0 0 0 4px rgba(245,130,32,.12),
+  var(--shadow);
+
+}
+
+.list{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:18px;
+
+}
+
+.card{
+
+  background:var(--glass);
+
+  border:1px solid var(--border);
+
+  border-radius:28px;
+
+  padding:24px;
+
+  cursor:pointer;
+
+  transition:.28s;
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:var(--shadow);
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+.card::before{
+
+  content:'';
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:4px;
+
+  background:linear-gradient(
+    90deg,
+    var(--orange),
+    var(--orange-light)
+  );
+
+}
+
+.card:hover{
+
+  transform:translateY(-4px);
+
+  background:var(--glass-2);
+
+}
+
+.card-top{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  gap:12px;
+
+  margin-bottom:16px;
+
+}
+
+.name{
+
+  font-size:22px;
+  font-weight:700;
+
+}
+
+.badge{
+
+  background:rgba(245,130,32,.12);
+
+  color:#FFD2A5;
+
+  border:1px solid rgba(245,130,32,.18);
+
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:700;
+
+}
+
+.info{
+
+  color:var(--muted);
+
+  margin-top:8px;
+
+  line-height:1.6;
+
+}
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,.78);
+
+  display:none;
+
+  align-items:flex-end;
+  justify-content:center;
+
+  z-index:999;
+
+  backdrop-filter:blur(8px);
+
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-content{
+
+  width:100%;
+  max-width:760px;
+
+  background:rgba(6,16,28,.92);
+
+  border-top:1px solid rgba(255,255,255,.08);
+
+  border-radius:34px 34px 0 0;
+
+  padding:32px;
+
+  backdrop-filter:blur(24px);
+
+  box-shadow:0 -12px 40px rgba(0,0,0,.5);
+
+}
+
+.modal-header{
+
+  display:flex;
+  align-items:center;
+
+  gap:16px;
+
+  margin-bottom:26px;
+
+}
+
+.avatar{
+
+  width:64px;
+  height:64px;
+
+  border-radius:22px;
+
+  background:linear-gradient(
+    135deg,
+    var(--orange),
+    var(--orange-light)
+  );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:24px;
+  font-weight:800;
+
+}
+
+.modal-title{
+
+  font-size:28px;
+  font-weight:800;
+
+}
+
+.modal-subtitle{
+
+  color:var(--muted);
+
+  margin-top:4px;
+
+}
+
+.section{
+  margin-top:24px;
+}
+
+.section-title{
+
+  color:var(--orange);
+
+  font-size:12px;
+  font-weight:700;
+
+  text-transform:uppercase;
+
+  letter-spacing:.12em;
+
+  margin-bottom:14px;
+
+}
+
+.info-card{
+
+  background:rgba(255,255,255,.03);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:24px;
+
+  padding:22px;
+
+  backdrop-filter:blur(18px);
+
+  margin-bottom:14px;
+
+}
+
+.info-card p{
+
+  color:var(--muted);
+
+  line-height:1.7;
+
+  margin-bottom:8px;
+
+}
+
+.buttons{
+
+  display:flex;
+
+  gap:14px;
+
+  margin-top:28px;
+
+}
+
+.btn{
+
+  flex:1;
+
+  height:58px;
+
+  border:none;
+
+  border-radius:18px;
+
+  font-size:15px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  text-decoration:none;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:.2s;
+
+}
+
+.btn-primary{
+
+  background:linear-gradient(
+    135deg,
+    var(--orange),
+    var(--orange-light)
+  );
+
+  color:white;
+
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+}
+
+.btn-secondary{
+
+  background:rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  color:white;
+
+}
+
+.footer{
+
+  margin-top:44px;
+
+  text-align:center;
+
+  color:rgba(255,255,255,.55);
+
+  font-size:13px;
+
+  padding-bottom:24px;
+
+}
+
+@media(max-width:640px){
+
+  body{
+    padding:18px;
+  }
+
+  .brand-title{
+    font-size:28px;
+  }
+
+  .modal-content{
+    padding:26px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="hero">
+
+    <div class="brand-area">
+
+      <img
+      src="https://creator.acelerai.com.br/resourses/creator/app/img/assai-1.png"
+      class="logo"
+      >
+
+      <div>
+
+        <h1 class="brand-title">
+          Assaí Connect
+        </h1>
+
+        <p class="brand-subtitle">
+          Gestão inteligente de promotores e fornecedores
+        </p>
+
+      </div>
+
+    </div>
+
+    <input
+    type="text"
+    class="search"
+    id="search"
+    placeholder="Buscar promotor, fornecedor ou supervisor"
+    >
+
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="footer">
+    developed by Denner Sousa - Chefe de Seção - AssaÍ Boulevard
+  </div>
+
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+
+const data = [
+  {
+    nome:'João Silva',
+    telefone:'21998604511',
+    fornecedor_nome:'Nestlé',
+    supervisor:'21997314969',
+    dias_trabalho:'TD',
+    situacao:'ATIVO'
+  },
+  {
+    nome:'João Silva',
+    telefone:'21998604511',
+    fornecedor_nome:'Unilever',
+    supervisor:'21997314969',
+    dias_trabalho:'SEG A SEX',
+    situacao:'ATIVO'
+  },
+  {
+    nome:'Maria Souza',
+    telefone:'21995555555',
+    fornecedor_nome:'Pepsi',
+    supervisor:'21994444444',
+    dias_trabalho:'QUA A SAB',
+    situacao:'INATIVO'
+  }
+];
+
+const list = document.getElementById('list');
+const search = document.getElementById('search');
+const modal = document.getElementById('modal');
+const modalContent = document.getElementById('modalContent');
+
+function render(searchText=''){
+
+  list.innerHTML='';
+
+  const filtered = data.filter(item => {
+
+    const text = searchText.toLowerCase();
+
+    return (
+      item.nome.toLowerCase().includes(text) ||
+      item.fornecedor_nome.toLowerCase().includes(text) ||
+      item.supervisor.toLowerCase().includes(text)
+    );
+
+  });
+
+  filtered.forEach(item => {
+
+    const card = document.createElement('div');
+
+    card.className='card';
+
+    card.innerHTML = `
+
+      <div class="card-top">
+
+        <div class="name">
+          ${item.nome}
+        </div>
+
+        <div class="badge">
+          ${item.fornecedor_nome}
+        </div>
+
+      </div>
+
+      <div class="info">
+        📞 ${formatPhone(item.telefone)}
+      </div>
+
+      <div class="info">
+        👨‍💼 Supervisor: ${formatPhone(item.supervisor)}
+      </div>
+
+    `;
+
+    card.onclick = () => openModal(item);
+
+    list.appendChild(card);
+
+  });
+
+}
+
+function openModal(item){
+
+  const statusIcon =
+    item.situacao === 'ATIVO'
+    ? '🟢'
+    : '🔴';
+
+  modalContent.innerHTML = `
+
+    <div class="modal-header">
+
+      <div class="avatar">
+        ${item.nome.charAt(0)}
+      </div>
+
+      <div>
+
+        <div class="modal-title">
+          ${item.nome}
+        </div>
+
+        <div class="modal-subtitle">
+          Promotor Assaí
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="section">
+
+      <div class="section-title">
+        Contato
+      </div>
+
+      <div class="info-card">
+
+        <p>
+          📞 Promotor: ${formatPhone(item.telefone)}
+        </p>
+
+        <p>
+          👨‍💼 Supervisor: ${formatPhone(item.supervisor)}
+        </p>
+
+        <p>
+          📅 Dias de trabalho: ${item.dias_trabalho}
+        </p>
+
+        <p>
+          ${statusIcon} Status do promotor: ${item.situacao}
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="section">
+
+      <div class="section-title">
+        Fornecedor
+      </div>
+
+      <div class="info-card">
+
+        <p>
+          🏢 Marca: ${item.fornecedor_nome}
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="buttons">
+
+      <a
+      class="btn btn-primary"
+      href="https://wa.me/55${item.telefone}"
+      target="_blank"
+      >
+        WhatsApp
+      </a>
+
+      <button
+      class="btn btn-secondary"
+      onclick="closeModal()"
+      >
+        Fechar
+      </button>
+
+    </div>
+
+  `;
+
+  modal.classList.add('active');
+
+}
+
+function closeModal(){
+  modal.classList.remove('active');
+}
+
+modal.addEventListener('click', e => {
+  if(e.target === modal){
+    closeModal();
+  }
+});
+
+search.addEventListener('input', e => {
+  render(e.target.value);
+});
+
+function formatPhone(phone){
+
+  phone = phone.replace(/\D/g,'');
+
+  if(phone.length === 11){
+
+    return phone.replace(
+      /(\d{2})(\d{5})(\d{4})/,
+      '($1) $2-$3'
+    );
+
+  }
+
+  return phone;
+
+}
+
+render();
+
+</script>
+
+</body>
+</html>
