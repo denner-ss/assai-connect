@@ -1,0 +1,4 @@
+id,nome,telefone,fornecedor_nome,supervisor,dias_trabalho,situacao
+1,João Silva,21998604511,Nestlé,21997314969,TD,ATIVO
+2,João Silva,21998604511,Unilever,21997314969,SEG A SEX,ATIVO
+3,Maria Souza,21995555555,Pepsi,21994444444,QUA A SAB,INATIVO
